@@ -1,6 +1,6 @@
 import './App.css';
 import Tictac from './components/tictac';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Win from './components/win';
 import Tie from './components/tie';
 function App() {
@@ -10,8 +10,6 @@ const [board, setBoard] = useState([
   [""],[""],[""],
 ]);
 const [isX, setIsX] = useState(true);
-const [timer, setTimer] = useState(0);
-const [min, setMin] = useState(0);
 const [tie, setTie] = useState(0);
 const isItX = (i) =>{
   const boardCopy = [...board];
@@ -33,8 +31,6 @@ const reset = () =>{
     [""],[""],[""],
   ])
   setIsX(true);
-  setTimer(0);
-  setMin(0);
   setTie(0);
 
 }
@@ -53,29 +49,18 @@ const isTie = () => {
   if(tie>=9 && !isWin()) { return true} 
   else return false;
 }
-const time = () => {
-  setTimeout(() => setTimer(timer + 1), 1000)
-  if (timer>=60){
-    setMin(min+1);
-    setTimer(timer-60);
-  }
-}
-
-useEffect(() =>{
-  time();
-},[time])
 
   return (
     <div className="App">
       { 
         isWin() ? <Win reset={reset} isX = {isX} /> :
-        <Tictac board={board} isX={isX} isItX={isItX} reset={reset} timer={timer} min={min}/>
+        <Tictac board={board} isX={isX} isItX={isItX} reset={reset}/>
       } 
       {(() => {
         if (isTie()) {
           return <Tie reset={reset}/>;
         } else {
-          <Tictac board={board} isX={isX} isItX={isItX} reset={reset} timer={timer} min={min}/>
+          <Tictac board={board} isX={isX} isItX={isItX} reset={reset}/>
         }
 })()}
     </div>

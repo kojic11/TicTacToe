@@ -1,6 +1,6 @@
 import './tictac.css'
 
-function Tictac({isItX, isX, board, reset, timer, min}){
+function Tictac({isItX, isX, board, reset}){
     // const darkMode = () =>{
     //     const body = document.body;
     //     const btn = document.getElementsByClassName("btn");
@@ -22,7 +22,6 @@ function Tictac({isItX, isX, board, reset, timer, min}){
                 )}
             </div>
             <button className='reset' onClick={reset}>Reset</button>
-            <p>{min+":"+timer}</p>
         </div>
     </div>
 }
